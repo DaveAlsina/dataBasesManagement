@@ -7,7 +7,7 @@ select * from
 	
 	INNER JOIN
 
-	facultad as f
+	(select * from facultad) as f
 	ON f.id = est_dep.id_facultad
 	
 	WHERE  f.nombre = 'Ingenieria, Ciencia y Tecnologia'
@@ -42,51 +42,64 @@ ON pro.id_departamento = group_course.id_departamento;
 
 
 --------------- 1)  C
-
-select * from
+select nombre, apellido from	--seleccion de la información de interés
 	(
-		(											
+		select nombre, apellido, id_grupo, id_curso, fecha_nacimiento from 
+		(
 			(select * from estudiante
-				WHERE genero = 'F') as e
+							WHERE genero = 'F') as e 		-- seleccion de las mujeres
 
-			INNER JOIN								--conexion de la tabla estudiante con inscripcion
+			INNER JOIN 										-- conexion de estudiantes mujeres con
+															-- sus datos de inscripción
+			(select * from inscripcion) as ins						
+			ON e.codigo = ins.codigo_estudiante
+		) as e_ins
 
-			inscripcion as i
-			ON e.codigo = i.codigo_estudiante
+		INNER JOIN											-- conexion de estudiantes mujeres inscritas
+															-- con su grupo de inscripoción
+		
+		(select id, id_curso from grupo) as gr 				-- seleccion de los id que se van a usar 
+		ON gr.id = e_ins.id_grupo							-- de la tabla grupo 
+		
+	) as est_ins_gr
 
-		) as est_inscrip
-
-		INNER JOIN									--conexion de la tabla estudiante_inscripcion con grupo
-
-		grupo as g
-		ON g.id = est_inscrip.id_grupo
-
-	) as  est_inscrip_grp
-
-	INNER JOIN										--conexion de la tabla est_inscrip_grp con curso->MBD 
-
-	(select * from curso
-		WHERE nombre = 'Manejo de Bases de Datos') as MBD
-	ON MBD.id = est_inscrip_grp.id_curso
-
-ORDER BY fecha_nacimiento;
+	INNER JOIN 												-- conexión de las estudiantes inscritas 
+															-- en sus grupos con la materia MBD
+	(select id from curso
+	 WHERE nombre = 'Manejo de Bases de Datos') as MBD		-- seleccion del curso de interés MBD
+	 ON est_ins_gr.id_curso = MBD.id
+	 
+ORDER BY fecha_nacimiento ASC;								-- ordenamiento del resultado
 
 
 --------------- 1)  D
 
+select nombre, apellido, fecha_nacimiento from
+	(
+		(
+			(select nombre, apellido, fecha_nacimiento, codigo from 
+			estudiante) as est
+			INNER JOIN 													-- conexion de estudiantes con
+																		-- sus datos de inscripción
+			(select * from inscripcion) as ins						
+			ON est.codigo = ins.codigo_estudiante
+		) as est_ins
 
+			INNER JOIN											-- conexion de estudiantes inscritos
+																-- con su grupo de inscripoción
 
+			(select id, id_curso from grupo) as gr 				-- seleccion de los id que se van a usar 
+			ON gr.id = est_ins.id_grupo							-- de la tabla grupo
 
+	) as  est_ins_gr
+		
+		INNER JOIN 											-- conexión de las estudiantes inscritos 
+															-- en sus grupos con la materia MBD
+	 (select id from curso
+	 WHERE nombre = 'Manejo de Bases de Datos') as MBD		-- seleccion del curso de interés MBD
+	 ON est_ins_gr.id_curso = MBD.id
 
-
-
-
-
-
-
-
-
-
-
+WHERE 
+ORDER BY fecha_nacimiento DESC;
 
 
