@@ -1,0 +1,51 @@
+--
+-- creacion de las tablas necesarias
+--
+
+
+create table producto(
+codigo integer primary key, 
+descripcion varchar(100) not null,
+precio_unitario real, 
+existencias integer);
+
+create table factura(
+numero integer primary key,
+fecha date not null);
+
+create table detalle_factura(
+numero_factura integer,
+codigo_producto  integer, 
+numero_detalle integer,
+unidades_detalle integer,
+precio_detalle real,
+constraint fk_factura
+	foreign key(numero_factura)
+	references factura(numero),
+constraint fk_producto
+	foreign key(codigo_producto)
+	references producto(codigo),
+primary key(numero_factura, numero_detalle));
+
+--
+-- insersión de datos en tabla factura
+--
+
+insert into factura(numero, fecha)
+values (1005, '2002-12-03'),
+(1006, '2002-12-03'),
+(1007, '2002-12-04');
+
+
+--
+-- consulta de facturas registradas en el mes de marzo del año 2018
+--
+
+select * from facturas
+where date like '2018-03-%';
+
+
+
+
+
+
