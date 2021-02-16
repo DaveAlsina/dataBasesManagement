@@ -99,7 +99,8 @@ select nombre, apellido, fecha_nacimiento from
 	 WHERE nombre = 'Manejo de Bases de Datos') as MBD		-- seleccion del curso de interés MBD
 	 ON est_ins_gr.id_curso = MBD.id
 
-WHERE 
+WHERE extract(year from age(CURRENT_DATE, fecha_nacimiento)) < 18
 ORDER BY fecha_nacimiento DESC;
 
+-- fuente: https://www.postgresql.org/docs/12/functions-datetime.html 
 
