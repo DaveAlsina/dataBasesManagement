@@ -104,3 +104,64 @@ ORDER BY fecha_nacimiento DESC;
 
 -- fuente: https://www.postgresql.org/docs/12/functions-datetime.html 
 
+--------------- 1)  E
+select nombre, apellido from
+
+	( 	
+		(select * from
+			(select nombre, apellido, codigo from estudiante) as est   --extracción de info importante del estudiante
+			INNER JOIN	
+			(select * from inscripcion 
+			 where calificacion < 3) as ins  					--extracción de estudiantes que perdieron
+			ON ins.codigo_estudiante = est.codigo				--relación entre estudiantes que perdieron 
+																--y su inscripción
+		) as est_ins
+
+		INNER JOIN								-- conexion de estudiantes inscritos
+												-- con su grupo de inscripoción
+
+		(select id, id_curso						-- selección de los grupos del 20201
+		 from grupo									-- extracción de los datos relevantes para linkear
+		 where anio = 2020 and periodo = 1) as gr 	-- con la tabla curso (no hay gente en 20201)
+
+		ON gr.id = est_ins.id_grupo					-- de la tabla grupo
+	)as est_ins_gr
+
+	INNER JOIN 
+	
+	(select id from curso							-- seleccion del curso de interés MBD
+	 WHERE nombre = 'Manejo de Bases de Datos') as MBD		
+	 ON est_ins_gr.id_curso = MBD.id
+	
+--------------- 1)  F
+select nombre from curso										
+where curso.id in(												
+		select id_curso from 									-- extrae el id del curso 
+		(
+			select id_grupo from horario as hr					--obtiene id_grupo de los salones casur
+			where hr.id_salon in  
+			(
+				select id from salon							--Obtiene el id del salon casur
+				where id_edificio in (select id from edificio
+									  where nombre = 'Casur')
+			)
+		) as hr_sl_edf
+
+		INNER JOIN								-- conecta hr_sl_edf con la tabla grupo
+
+		(select id, id_curso from grupo) as gr	-- selecciona solo lo necesario de la tabla grupo
+		ON hr_sl_edf.id_grupo = gr.id
+	) 
+
+Order by nombre;
+
+
+
+
+
+
+
+
+
+
+
