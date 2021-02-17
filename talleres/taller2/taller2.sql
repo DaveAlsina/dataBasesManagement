@@ -42,6 +42,7 @@ ON pro.id_departamento = group_course.id_departamento;
 
 
 --------------- 1)  C
+
 select nombre, apellido from	--seleccion de la información de interés
 	(
 		select nombre, apellido, id_grupo, id_curso, fecha_nacimiento from 
@@ -155,10 +156,27 @@ where curso.id in(
 
 Order by nombre;
 
+--------------- 1)  G
 
+select nombre, apellido from
+(
+	select nombre, apellido, id_grupo from
+	(
+		select nombre, apellido, codigo from estudiante			--seleccion de los estudiantes de MACC
+		where id_departamento in
+			(
+				select id from departamento as dep
+				where nombre = 'MACC'
+			)
+	)as est_macc
 
-
-
+	INNER JOIN
+	(select id_grupo, codigo_estudiante from inscripcion) as ins
+	ON est_macc.codigo = ins.codigo_estudiante
+	
+) as est_macc_ins
+where est_macc_ins.id_grupo in (select id_grupo from horario where dia = 3)
+	
 
 
 
