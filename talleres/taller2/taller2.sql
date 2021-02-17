@@ -180,6 +180,32 @@ where est_macc_ins.id_grupo in (select id_grupo from horario where dia = 3)
 
 
 
+--------
+--------		SET DE EJERCICIOS 2
+--------
+
+
+-- a) 
+
+create view est_fac_dep as
+select 
+	est.nombre,
+	est.apellido,
+	dep.nombre,
+	fac.nombre
+	
+from estudiante as est, departamento as dep, facultad as fac
+where est.id_departamento = dep.id and dep.id_facultad = fac.id
+
+--b)
+
+
+
+
+
+
+
+
 
 
 
