@@ -276,7 +276,22 @@ add foreign key(sec_id, semester, year)
 references section2(sec_id, semester, year);
 
 
+--
+-- Ejercicio 3c
+--
 
+alter table teaches2 
+add constraint dia_semana_const
+check(day in ('M', 'T', 'W', 'R', 'F', 'S'));
+
+alter table teaches2 
+add constraint max_estud
+check(capacity <= 30);
+
+
+alter table teaches2 
+add constraint max_estud
+check(grade in ('A','A-','B+','B','B-','C+','C','C-','D+','D','D-','F'));
 
 
 

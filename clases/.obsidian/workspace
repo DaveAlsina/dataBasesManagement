@@ -1,0 +1,96 @@
+{
+  "main": {
+    "id": "ba010f7355ca6fd7",
+    "type": "split",
+    "children": [
+      {
+        "id": "6dbcb6d97be9d80a",
+        "type": "leaf",
+        "active": true,
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "procedimientos y trigger/Procedimiento.md",
+            "mode": "source"
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "36518b939ca53266",
+    "type": "split",
+    "children": [
+      {
+        "id": "685fdb4374d6ee89",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "5e76f3882942d0a1",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "5fc8cf8bec6b58f6",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": true,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 100
+  },
+  "right": {
+    "id": "990c96d60fc9bd9f",
+    "type": "split",
+    "children": [
+      {
+        "id": "5d100cbd9b9a8974",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "bce4610a4dbeecb1",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "procedimientos y trigger/Procedimiento.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "lastOpenFiles": [
+    "procedimientos y trigger/Procedimiento.md",
+    "procedimientos y trigger/Untitled.md",
+    "trigger/trigger resumen.md",
+    "trigger/Untitled.md",
+    "union, intersect, except/union, intersect, except.md",
+    "union, intersect, except/Untitled.md"
+  ]
+}
